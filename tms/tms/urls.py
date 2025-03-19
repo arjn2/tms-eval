@@ -19,8 +19,8 @@ from django.urls import path,include
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('',include('app_tms.app_tms_urls')),
-    path("employees/", include("employees.employees_urls")),  # Employee-related actions
-    path("admins/", include("admins.admin_urls")),  # Admin-related actions
-    path("managers/", include("managers.managers_urls"))  # Manager-related actions
+    path('',include('app_tms.urls')),
+    path("employees/", include("employees.urls")),  # Employee-related actions
+    path("admins/", include("admins.urls")),  # Admin-related actions
+    path("managers/", include("managers.urls"))  # Manager-related actions
 ]
