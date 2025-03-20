@@ -85,6 +85,7 @@ class Travel_Requests(models.Model):
     preferred_lodging_location = models.CharField(max_length=255, null=True, blank=True)
     additional_requests=models.CharField(max_length=255)
     travel_purpose=models.CharField(max_length=255)
+    lodging_location=models.CharField(max_length=255,null=True)
     # requested_date=models.DateField()
 
     #dates
