@@ -82,7 +82,7 @@ class Travel_Requests(models.Model):
     to_location=models.CharField(max_length=50)
     preferred_travel_mode=models.CharField(max_length=255)
     lodging_required=models.SmallIntegerField()
-    preferred_lodging_location = models.CharField(max_length=255, null=True, blank=True)
+    #preferred_lodging_location = models.CharField(max_length=255, null=True, blank=True)
     additional_requests=models.CharField(max_length=255)
     travel_purpose=models.CharField(max_length=255)
     lodging_location=models.CharField(max_length=255,null=True)
