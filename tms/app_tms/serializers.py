@@ -49,19 +49,21 @@ class ManagerAssignmentsSerializer(serializers.ModelSerializer):
 
 
 class TravelRequestsSerializer(serializers.ModelSerializer):
-    # class Meta:
-    #     model=Manager_Assignments
-    #     fields='__all__'
-    # def create(self, validated_data):
-    #     # exit
-    #     # print(now().date())
-    #     validated_data["created_at"] = now().date()
-    #     return super().create(validated_data)
-
     class Meta:
         model = Travel_Requests
         fields = "__all__"
         read_only_fields = ("created_at",)
+
+
+class TravelRequestsUpdateSerializer(serializers.ModelSerializer):
+    """
+    serializer for update travel-request
+    manager id , employee id is prevented from updating.
+    """
+    class Meta:
+        model = Travel_Requests
+        fields = '__all__'
+        read_only_fields = ['manager', 'employee'] 
 
 class NotesSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
