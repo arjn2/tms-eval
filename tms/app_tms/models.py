@@ -152,6 +152,17 @@ class Notes(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,null=True)
 
 
+    #notes read status
+    class ReadStatusIndex(models.TextChoices):
+        READ='RD','READ'
+        NEW='NE','NEW'
+
+    read_status=models.CharField(
+        max_length=20,
+        choices=ReadStatusIndex.choices,
+        default=ReadStatusIndex.NEW
+    )
+
 
 
 
