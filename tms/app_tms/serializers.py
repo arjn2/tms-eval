@@ -48,27 +48,36 @@ class ManagerAssignmentsSerializer(serializers.ModelSerializer):
 
 
 
-# class TravelRequestsSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Travel_Requests
-#         fields = "__all__"
-#         read_only_fields = ("created_at",)
+
+
+
 
 class TravelRequestsSerializer(serializers.ModelSerializer):
     '''
-    when fetch data, fetch the manager name also
+    when fetch data, fetch the manager name ,new notes count also
     '''
     manager_name = serializers.SerializerMethodField()
+    new_notes_count = serializers.SerializerMethodField()  # Count only new notes
 
     class Meta:
         model = Travel_Requests
-        fields = "__all__"  # Keeps all existing fields and adds new ones
+        fields = "__all__"
         read_only_fields = ("created_at",)
 
     def get_manager_name(self, obj):
-        if obj.manager and obj.manager.login_auth:  # Use login_auth instead of auth_user
+        '''
+         get manager full name from login table 
+         '''
+        if obj.manager and obj.manager.login_auth:  
             return f"{obj.manager.login_auth.first_name} {obj.manager.login_auth.last_name}".strip()
-        return None
+        return None  
+
+    def get_new_notes_count(self, obj):
+        '''
+         get notes count from refering request id in notes table.
+         '''
+        return Notes.objects.filter(request=obj, read_status="NE").count()  # Count only NEW notes
+
 
 
 class TravelRequestsUpdateSerializer(serializers.ModelSerializer):
