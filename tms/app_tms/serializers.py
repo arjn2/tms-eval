@@ -48,11 +48,24 @@ class ManagerAssignmentsSerializer(serializers.ModelSerializer):
 
 
 
+# class TravelRequestsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Travel_Requests
+#         fields = "__all__"
+#         read_only_fields = ("created_at",)
+
 class TravelRequestsSerializer(serializers.ModelSerializer):
+    manager_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Travel_Requests
-        fields = "__all__"
+        fields = "__all__"  # Keeps all existing fields and adds new ones
         read_only_fields = ("created_at",)
+
+    def get_manager_name(self, obj):
+        if obj.manager and obj.manager.login_auth:  # Use login_auth instead of auth_user
+            return f"{obj.manager.login_auth.first_name} {obj.manager.login_auth.last_name}".strip()
+        return None
 
 
 class TravelRequestsUpdateSerializer(serializers.ModelSerializer):
