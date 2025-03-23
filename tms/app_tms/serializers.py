@@ -55,6 +55,9 @@ class ManagerAssignmentsSerializer(serializers.ModelSerializer):
 #         read_only_fields = ("created_at",)
 
 class TravelRequestsSerializer(serializers.ModelSerializer):
+    '''
+    when fetch data, fetch the manager name also
+    '''
     manager_name = serializers.SerializerMethodField()
 
     class Meta:
